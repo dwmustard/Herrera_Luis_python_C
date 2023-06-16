@@ -1,8 +1,10 @@
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.shortcuts import render, redirect
+
 from .models import Libros
 from .forms import LibroForms
+
 # Create your views here.
 def index(request):
     return HttpResponse("Hola mundo")
@@ -18,8 +20,10 @@ class Index(View):
         return render(request, self.template_name, {'form': form})
     
     def get(self, request):
+        libros = Libros.objects.all()
+
         form = LibroForms()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,'libros':libros})
     
     def insertar_libro(request):
         nuevo_libro = Libros(

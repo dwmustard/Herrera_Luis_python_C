@@ -20,6 +20,13 @@
     </div>
     <!-- contenido -->
     <div>
+        {% for libro in libros: %}
+        <p>{{ libro.titulo }}</p>
+
+        {% endfor %}
+    </div>
+
+    <div>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
