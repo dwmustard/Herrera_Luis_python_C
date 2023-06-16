@@ -6,7 +6,7 @@ from .models import Libros
 def index(request):
     return HttpResponse("Hola mundo")
 
-class Inicio(View):
+class Index(View):
     template_name = 'index.html'
     def post():
         return
@@ -20,7 +20,7 @@ class Inicio(View):
             titulo="El gran libro",
             edicion="Primera edición",
             editorial="Editorial XYZ",
-            año_publicacion=2022,
+            anio_de_publicacion=2022,
             paginas=200
         )
         nuevo_libro.save()
