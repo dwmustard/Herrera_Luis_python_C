@@ -1,0 +1,114 @@
+{% load  bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+  <head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+      
+      .titulo{
+        background-color: #286150;
+        border-radius: 20px;
+        padding: 10px;
+        font-family: arial;
+      }
+      h1{
+        color:white;
+        font-size: xxx-large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- encabezado -->
+    <div class="titulo" align="center">
+      <h1>Productos</h1>
+    </div>
+    <!-- contenido -->
+    {% block content %}
+    <div align="center">
+      <div style="width: 70%;">
+        {% if productos %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col1">
+                #
+              </th>
+              <th scope="col1">
+                Nombre
+              </th>
+              <th scope="col1">
+                Descripcion
+              </th>
+              <th scope="col1">
+                Precio
+              </th>
+              <th scope="col1">
+                Fecha de Ingreso
+              </th>
+              <th scope="col1">
+                Estatus
+              </th>
+            </tr>
+          </thead>
+            
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                <td scope="row">
+                    {{ producto.id }}
+                </td>
+                <td scope="row">
+                    {{ producto.nombre }}
+                </td>
+                <td scope="row">
+                    {{ producto.descripcion }}
+                </td>
+                <td scope="row">
+                    {{ producto.precio }}
+                </td>
+                <td scope="row">
+                    {{ producto.fecha_ingreso }}
+                </td>
+                <td scope="row">
+                    {{ producto.estatus }}
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% else %}
+                No hay productos
+            {% endif %}
+           
+        </table>
+        <br>
+        <br>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.nombre.id_for_label }}">Nombre</label>
+            {{ form.nombre|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.descripcion.id_for_label }}">Descripcion</label>
+            {{ form.descripcion|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.precio.id_for_label }}">Precio</label>
+            {{ form.precio|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.fecha_ingreso.id_for_label }}">Fecha de Ingreso</label>
+            {{ form.fecha_ingreso|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.estatus.id_for_label }}">Estatus</label>
+            {{ form.estatus|add_class:"form-control" }}
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+         </form>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>
