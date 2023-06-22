@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Libros(models.Model):
+
+    class Meta:
+        verbose_name = "Libros"
+        verbose_name_plural = "Libros"
+
     titulo = models.CharField("Titulo",max_length=300,default="")
     edicion = models.CharField("Edicion",max_length=300,default="")
     editorial = models.CharField("Editorial",max_length=300,default="")

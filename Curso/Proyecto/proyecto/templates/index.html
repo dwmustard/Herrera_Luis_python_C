@@ -1,6 +1,11 @@
+{% load  bootstrap4 %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
   <head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <style>
+      
       .titulo{
         background-color: #286150;
         border-radius: 20px;
@@ -19,19 +24,85 @@
       <h1>Libros</h1>
     </div>
     <!-- contenido -->
-    <div>
-        {% for libro in libros: %}
-        <p>{{ libro.titulo }}</p>
-
-        {% endfor %}
-    </div>
-
-    <div>
+    {% block content %}
+    <div align="center">
+      <div style="width: 70%;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col1">
+                #
+              </th>
+              <th scope="col1">
+                Titulo
+              </th>
+              <th scope="col1">
+                Edicion
+              </th>
+              <th scope="col1">
+                Editorial
+              </th>
+              <th scope="col1">
+                Anio de publicacion
+              </th>
+              <th scope="col1">
+                Numero de paginas
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for libro in libros %}
+            <tr>
+              <td scope="row">
+                {{ libro.id }}
+              </td>
+              <td scope="row">
+                {{ libro.titulo }}
+              </td>
+              <td scope="row">
+                {{ libro.edicion }}
+              </td>
+              <td scope="row">
+                {{ libro.editorial }}
+              </td>
+              <td scope="row">
+                {{ libro.anio_de_publicacion }}
+              </td>
+              <td scope="row">
+                {{ libro.paginas }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <br>
+        <br>
         <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Guardar</button>
-        </form>
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.titulo.id_for_label }}">Titulo</label>
+            {{ form.titulo|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.edicion.id_for_label }}">Edicion</label>
+            {{ form.edicion|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.editorial.id_for_label }}">Editorial</label>
+            {{ form.editorial|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.anio_de_publicacion.id_for_label }}">Año de publicacion</label>
+            {{ form.anio_de_publicacion|add_class:"form-control" }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.paginas.id_for_label }}">No. de paginas</label>
+            {{ form.paginas|add_class:"form-control" }}
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar</button>
+         </form>
+      </div>
     </div>
+    {% endblock %}
   </body>
 </html>
