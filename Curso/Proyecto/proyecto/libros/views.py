@@ -23,7 +23,7 @@ class Index(View):
         libros = Libros.objects.all()
 
         form = LibroForms()
-        return render(request, self.template_name, {'form': form,'libros':libros})
+        return render(request, self.template_name, {'form': form,'libros': libros})
     
     def insertar_libro(request):
         nuevo_libro = Libros(
